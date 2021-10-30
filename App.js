@@ -4,10 +4,10 @@ import { StyleSheet, Text, View, Image, Button, Alert } from 'react-native';
 
 
 
-import Login from './source/components/pages/Login';
 import Cadastro from './source/components/pages/Cadastro';
-//import Quartos from './source/components/pages/Quartos';
-//import UserLogin from './source/components/user/Login';
+import Login from './source/components/pages/Login';
+import Quartos from './source/components/pages/Quartos';
+
 
 
 export default function App() {
@@ -15,12 +15,20 @@ export default function App() {
     <View >
 
 
-      <Image source={require('./source/components/imgs/Inicial.png')} style={{ width: 500, height: 800, marginTop: 45 }} />
-      <Image source={require('./source/components/imgs/Logo.png')} style={{ width: 250, height: 100, marginTop: -780 }} />
+      <Image source={require('./source/components/imgs/inicial.png')} 
+        style={{ width: 500, height: 800, marginTop: 50 }}
+      />
+
+      <Image source={require('./source/components/imgs/Logo.png')} 
+        style={{ width: 250, height: 100, marginTop: -750}} 
+      />
+
       <Login />
       <Cadastro />
+
 
     </View>
   );
 }
+
 

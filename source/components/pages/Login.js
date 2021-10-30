@@ -1,19 +1,16 @@
 import React from "react";
-import {View, Text, StyleSheet,Image, Button, Alert} from 'react-native';
+import {View, Text, StyleSheet,Image, Button, Alert, TextInput } from 'react-native';
 
 
 const Header = (props) => (
 
     <View style = {style.container}>
-
-
-
+        
         <Button
             title="Login"
             onPress={() => Alert.alert=('./source/components/pages/Quartos')}      
         />
-
-
+        
     </View>
 
 
@@ -30,9 +27,7 @@ const style = StyleSheet.create({
     },
     title: {
 
-        flex: 1,
         fontSize: 25,
-
     }
 });
 
