@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { NavigationContainer } from '@react-navigation/native';
 import {
     View,
     Text,
@@ -7,27 +9,31 @@ import {
     TextInput
 } from 'react-native'
 
+
+import Quartos from './Quartos'
+
+
 class Login extends Component {
     state= {
         email: '',
         password: ''
     }
 
-    login = () => {
-        this.props.navigation.navigate('Quartos')
-    }
+     login = ({ navigation }) => {
+        navigation.navigate(Quartos)
+    } 
 
     render() {
         return (
             <View style={styles.container}>
                 <TextInput placeholder placeholder='Email' style={styles.input}
-                    autoFocus={true} keyboardType='email-address'
+                    autoFocus={false} keyboardType='email-address'
                     value={this.state.email}
                     onChangeText={email => this.setState( { email})} />
                 <TextInput placeholder='Senha' style={styles.input}
                     secureTextEntry={true} value={this.state.password}
                     onChangeText={password => this.setState({ password })} />
-                <TouchableOpacity onPress={this.login} style={styles.buttom}>
+                <TouchableOpacity onPress={this.login} style={styles.buttom }>
                     <Text style={styles.buttomText}>Login</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => {}} style={styles.buttom}>
@@ -65,3 +71,16 @@ const styles = StyleSheet.create({
 })
 
 export default Login
+
+
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Login</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Details')}
+      />
+    </View>
+  );
+}

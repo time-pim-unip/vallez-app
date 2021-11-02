@@ -1,6 +1,8 @@
 import React from "react";
 import {View, Text, StyleSheet, ImageBackgroundComponent, Button} from 'react-native';
 
+
+
 const Quartos = (props) => (
 
     <View style = {style.container}>
@@ -17,6 +19,15 @@ const Quartos = (props) => (
 );
 
 
+//const tab = createSwitchNavigator();
+//
+//function Mytabs(){
+//    return(
+//        <tab.Navigator>
+//            <Tab.Screen name= "teste" component={Quartos}/>
+//        </tab.Navigator>
+//    );
+//}
 
 
 const style = StyleSheet.create({
