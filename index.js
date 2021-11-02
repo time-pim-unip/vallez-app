@@ -1,10 +1,7 @@
-/**
- * @format
- */
-
- import {AppRegistry} from 'react-native';
- //import Navegacao from './source/components/navegacao';
- import App from './App';
- import {name as appName} from './app.json';
+import registerRootComponent from 'expo/build/launch/registerRootComponent';
  
- AppRegistry.registerComponent(appName, () => App);
+//import Navegacao from './source/components/navegacao';
+import App from './App'
+//import Login from './source/components/pages/Login';
+ 
+registerRootComponent(App);
