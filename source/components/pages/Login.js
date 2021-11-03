@@ -1,47 +1,46 @@
-import React, { Component } from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { NavigationContainer } from '@react-navigation/native';
+import React, { useState } from 'react'
 import {
     View,
-    Text,
     StyleSheet,
     TouchableOpacity,
-    TextInput
+    TextInput,
+    Image
 } from 'react-native'
+import { Input, Text } from 'react-native-elements'
 
+export default function Login({ navigation }) {
 
-import Quartos from './Quartos'
+    const [email, setEmail] = useState(null)
+    const [password, setPassword] = useState(null)
 
-
-class Login extends Component {
-    state= {
-        email: '',
-        password: ''
+    const entrar = () => {
+        navigation.navigate('Quartos')
     }
 
-     login = ({ navigation }) => {
-        navigation.navigate(Quartos)
-    } 
-
-    render() {
-        return (
-            <View style={styles.container}>
-                <TextInput placeholder placeholder='Email' style={styles.input}
-                    autoFocus={false} keyboardType='email-address'
-                    value={this.state.email}
-                    onChangeText={email => this.setState( { email})} />
-                <TextInput placeholder='Senha' style={styles.input}
-                    secureTextEntry={true} value={this.state.password}
-                    onChangeText={password => this.setState({ password })} />
-                <TouchableOpacity onPress={this.login} style={styles.buttom }>
-                    <Text style={styles.buttomText}>Login</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => {}} style={styles.buttom}>
-                    <Text style={styles.buttomText}>Cadastrar Conta</Text>
-                </TouchableOpacity>
+    return (
+        <View style={styles.Logo, styles.container}>
+            <View>
+                <Image source={require('../imgs/Logo.png')}
+                    style={{ width: 250, height: 100, marginTop: -120 }} />
             </View>
-        )
-    }
+                <Input placeholder placeholder='Email' style={styles.input}
+                    autoFocus={false} keyboardType='email-address'
+                    onChangeText={value => setEmail(value)} 
+                    leftIcon={{ type: 'font-awesome', name: 'envelope' }} 
+                    leftIconContainerStyle={{ backgroundColor: '#FFF',borderColor: '#FFF', borderLeftWidth: 10, borderRightWidth: 1, }} />
+                <Input placeholder='Senha' style={styles.input}
+                    secureTextEntry={true}
+                    onChangeText={value => setPassword(value)}
+                    leftIcon={{ type: 'fontisto', name: 'key'}}
+                    leftIconContainerStyle={{ backgroundColor: '#FFF', borderColor: '#FFF', borderLeftWidth: 5, borderRightWidth: 4}} />
+            <TouchableOpacity onPress={() => entrar()} style={styles.buttom}>
+                <Text style={styles.buttomText}>Login</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => {}} style={styles.buttom}>
+                <Text style={styles.buttomText}>Cadastrar Conta</Text>
+            </TouchableOpacity>
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({
@@ -49,38 +48,34 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: -40
+        backgroundColor: '#0D729C'
     },
     buttom: {
-        marginTop: 30,
+        marginTop: 40,
         padding: 10,
-        backgroundColor: '#4169E1'
+        backgroundColor: '#4169E1',
+        borderColor: '#6495ED',
+        borderWidth: 2
     },
     buttomText: {
-        fontSize: 20,
-        color: '#000'
+        fontSize: 15,
+        color: '#fff'
     },
     input: {
-        marginTop: 20,
+        marginTop: 0,
         width: 350,
-        backgroundColor: '#EEE',
-        height: 40,
-        borderWidth: 1,
-        borderColor: '#333'
+        backgroundColor: '#FFF',
+        height: 30,
+        borderColor: '#333',
+        padding: 5
+    },
+    Logo: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 })
 
-export default Login
 
 
-function HomeScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Login</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
-      />
-    </View>
-  );
-}
+
