@@ -26,11 +26,5 @@ export default function App() {
   );
 }
 
-/*
-<Image source={require('./source/components/imgs/Logo.png')}
-    style={{ width: 250, height: 100, marginTop: -750}}
-/>
-*/
-
 
 
