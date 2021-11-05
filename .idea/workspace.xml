@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5391b3e-530d-4cd0-92cc-6c92b68c9b77" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/components/pages/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/source/components/pages/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/source/components/pages/Navigator.js" beforeDir="false" />
-    </list>
+    <list default="true" id="e5391b3e-530d-4cd0-92cc-6c92b68c9b77" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
