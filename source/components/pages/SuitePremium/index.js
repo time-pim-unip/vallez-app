@@ -5,7 +5,7 @@ export default function suitePremium() {
     return (
         <View >
             <View style={styles.container}>
-                <Image source={require('/app/vallez-app/source/components/imgs/hotel-cama.png')}
+                <Image source={require('../../imgs/hotel-cama.png')}
                 style={{ width: 500, height: 290, marginTop: 300 }} />
             </View>
             <Text style={styles.text}> 
@@ -57,6 +57,6 @@ const styles = StyleSheet.create({
         borderColor: '#6495ED',
         borderWidth: 2,
         justifyContent: 'center',
-        marginTop: 220
+        marginTop: 95
     },
 })
