@@ -2,6 +2,7 @@ import React, {useState } from "react";
 import { SafeAreaView, View, Text, StyleSheet, ImageBackgroundComponent, Button, Image, TouchableOpacity } from 'react-native';
 import { ScrollView } from "react-native-gesture-handler";
 
+
 export default function Quartos({ navigation }) {
   
   const suitepremium = () => {
