@@ -22,8 +22,6 @@ export default function SuiteMaster2() {
     )
 }
 
-
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,

@@ -24,8 +24,6 @@ export default function Quartosolteiro() {
     )
 }
 
-
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,

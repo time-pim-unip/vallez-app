@@ -3,17 +3,11 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 
 
 
-export default function solicitacoes (){
-
-
-
-    return(
-        
+export default function solicitacoes() {
+    return (
         <View style={styles.container}>
             <Text style={styles.text}>Hello</Text>
         </View>
-
-
     )
 }
 
@@ -26,7 +20,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     },
     text: {
-        fontSize : 50,
+        fontSize: 50,
         right: 0,
         marginTop: 0,
         fontWeight: 'bold',

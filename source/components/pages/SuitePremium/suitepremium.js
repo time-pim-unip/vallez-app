@@ -1,27 +1,25 @@
 import React from 'react'
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 
-export default function suitePremium({navigation}) {
+export default function suitePremium({ navigation }) {
 
     const solicitacoes = () => {
-        navigation.navigate('Solicitacoes')
+        navigation.navigate('Solicitações')
     }
-
-
 
     return (
         <View >
             <View style={styles.container}>
                 <Image source={require('../../imgs/suitepremium.png')}
-                style={{ width: 500, height: 290, marginTop: 300 }} />
+                    style={{ width: 500, height: 290, marginTop: 300 }} />
             </View>
-            <Text style={styles.text}> 
+            <Text style={styles.text}>
                 Informações
             </Text>
             <Text style={styles.informacao}>
                 Pegar no Desktop
             </Text>
-            <TouchableOpacity onPress={() => solicitacoes()} 
+            <TouchableOpacity onPress={() => solicitacoes()}
                 style={styles.buttom}>
                 <Text style={{ color: '#fff', textAlign: 'center', fontWeight: 'bold' }}>Solicitar Serviços</Text>
             </TouchableOpacity>
@@ -29,9 +27,6 @@ export default function suitePremium({navigation}) {
 
     )
 }
-
-
-
 
 const styles = StyleSheet.create({
     container: {
@@ -46,7 +41,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'black',
     },
-    informacao:{
+    informacao: {
         right: -10,
         marginTop: 10,
         color: 'black',
