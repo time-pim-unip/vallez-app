@@ -6,13 +6,30 @@ export default function Quartos({ navigation }) {
   
   const suitepremium = () => {
     navigation.navigate('SuitePremium')
+
+  }
+
+  const suitemaster = () => {
+    navigation.navigate('SuiteMaster')
+  }
+
+  const suitemaster2 = () => {
+    navigation.navigate('SuiteMaster2')
+  }
+
+  const suitecasal = () => {
+    navigation.navigate('SuiteCasal')
+  }
+
+  const Quartosolteiro = () => {
+    navigation.navigate('Quartosolteiro')
   }
 
   return (
     <ScrollView>
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
-      <Text style={{ marginLeft: -30, fontWeight: 'bold', fontSize: 20}}>Escolha seu Quarto:</Text>
+      <Text style={{ marginLeft: -30, fontWeight: 'bold', fontSize: 20}}>Suas Locações Ativas: </Text>
       <TouchableOpacity 
           onPress={() => suitepremium()}
           style={styles.buttonQuartosStyle}
@@ -28,6 +45,7 @@ export default function Quartos({ navigation }) {
 
         
         <TouchableOpacity
+          onPress={() => suitemaster()}
           style={styles.buttonQuartosStyle}
           activeOpacity={0.5}>
           <Image
@@ -40,6 +58,7 @@ export default function Quartos({ navigation }) {
         </TouchableOpacity>
         
         <TouchableOpacity
+          onPress={() => suitemaster2()}
           style={styles.buttonQuartosStyle}
           activeOpacity={0.5}>
           <Image
@@ -52,6 +71,7 @@ export default function Quartos({ navigation }) {
         </TouchableOpacity>
 
         <TouchableOpacity
+          onPress={() => suitemaster3()}
           style={styles.buttonQuartosStyle}
           activeOpacity={0.5}>
           <Image
@@ -64,6 +84,7 @@ export default function Quartos({ navigation }) {
         </TouchableOpacity>
 
         <TouchableOpacity
+          onPress={() => suitecasal()}
           style={styles.buttonQuartosStyle}
           activeOpacity={0.5}>
           <Image
@@ -77,6 +98,7 @@ export default function Quartos({ navigation }) {
 
         
         <TouchableOpacity
+          onPress={() => suitecasalsimples()}
           style={styles.buttonQuartosStyle}
           activeOpacity={0.5}>
           <Image
@@ -90,6 +112,7 @@ export default function Quartos({ navigation }) {
 
 
         <TouchableOpacity
+          onPress={() => Quartosolteiro()}
           style={styles.buttonQuartosStyle}
           activeOpacity={0.5}>
           <Image

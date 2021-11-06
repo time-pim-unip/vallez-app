@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 
-export default function suitePremium() {
+export default function SuiteMaster() {
     return (
         <View >
             <View style={styles.container}>
@@ -12,19 +12,15 @@ export default function suitePremium() {
                 Informações
             </Text>
             <Text style={styles.informacao}>
-                A Suite Premium conta com 2 camas king size, 2 quartos, 5 ambientes,
-                 boate espelhada, canal de filme, canal de shows, espaço gourmet com churrasqueira, 
-                 espelho d'água, frigobar, garagem para 6 carros, hidro grande (6 pessoas), lounge, 
-                 mesa para refeições, piscina, pole dance, smart TV 42", smart TV 65", Wi-Fi.
+                Pegar no Desktop
             </Text>
             <TouchableOpacity style={styles.buttom}>
-                <Text style={{ color: '#fff', textAlign: 'center', fontWeight: 'bold' }}>Reservar</Text>
+                <Text style={{ color: '#fff', textAlign: 'center', fontWeight: 'bold' }}>Solicitar Serviços</Text>
             </TouchableOpacity>
         </View>
 
     )
 }
-
 
 
 

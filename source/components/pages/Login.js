@@ -23,8 +23,8 @@ export default function Login({ navigation }) {
                 <Image source={require('../imgs/Logo.png')}
                     style={{ width: 240, height: 100, marginTop: -130 }} />
             </View>
-            <Text style={styles.text}>Email:</Text>
-            <Input placeholder placeholder='Digite seu email'
+            <Text style={styles.text}>Cpf:</Text>
+            <Input placeholder placeholder='Digite seu Cpf'
                 autoFocus={false} keyboardType='email-address'
                 onChangeText={value => setEmail(value)}
                 leftIcon={{ type: 'font-awesome', name: 'envelope' }}
@@ -39,9 +39,6 @@ export default function Login({ navigation }) {
                 inputContainerStyle={{ borderRadius: 10, backgroundColor: '#fff', height: 40 }} />
             <TouchableOpacity onPress={() => entrar()} style={styles.buttom}>
                 <Text style={{ color: '#FFF', textAlign: 'center', fontWeight: 'bold' }}>Login</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => { }} style={styles.buttom}>
-                <Text style={{ color: '#FFF', textAlign: 'center', fontWeight: 'bold' }}>Cadastrar Conta</Text>
             </TouchableOpacity>
         </View>
     )
