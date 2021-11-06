@@ -5,7 +5,7 @@ export default function SuiteMaster() {
     return (
         <View >
             <View style={styles.container}>
-                <Image source={require('/app/vallez-app/source/components/imgs/hotel-cama.png')}
+                <Image source={require('../../imgs/hotel-cama.png')}
                 style={{ width: 500, height: 290, marginTop: 300 }} />
             </View>
             <Text style={styles.text}> 
