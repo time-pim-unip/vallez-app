@@ -47,9 +47,6 @@ export default function Login({ navigation }) {
             </TouchableOpacity>
 
 
-            <TouchableOpacity onPress={() => { }} style={styles.buttom}>
-                <Text style={{ color: '#FFF', textAlign: 'center', fontWeight: 'bold' }}>Cadastrar Conta</Text>
-            </TouchableOpacity>
         </SafeAreaView>
 
     )

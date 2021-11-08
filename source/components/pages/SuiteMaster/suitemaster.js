@@ -1,8 +1,17 @@
 import React from 'react'
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 
-export default function SuiteMaster() {
+export default function SuiteMaster({navigation}) {
+
+
+    const solicitacoes = () => {
+        navigation.navigate('Solicitações')
+    }
+
+
     return (
+
+        
         <View >
             <View style={styles.container}>
                 <Image source={require('../../imgs/hotel-cama.png')}
@@ -14,7 +23,8 @@ export default function SuiteMaster() {
             <Text style={styles.informacao}>
                 Pegar no Desktop
             </Text>
-            <TouchableOpacity style={styles.buttom}>
+            <TouchableOpacity onPress={() => solicitacoes()}  
+                style={styles.buttom}>
                 <Text style={{ color: '#fff', textAlign: 'center', fontWeight: 'bold' }}>Solicitar Serviços</Text>
             </TouchableOpacity>
         </View>
