@@ -16,37 +16,50 @@ export default function Login({ navigation }) {
 
     const entrar = () => {
         navigation.navigate('Quartos')
+
+
     }
 
     return (
         <SafeAreaView style={styles.container}>
             <View>
-                <Image source={require('../imgs/Logo.png')}
-                    style={{ width: 240, height: 100, marginTop: -130 }} />
+                <Image source={require('../imgs/hotel.png')} style={{ width: 420, height: 890, marginTop: -250 }} />
             </View>
-            <Text style={styles.text}>CPF:</Text>
+
+            <View>
+                <Image source={require('../imgs/Logo.png')}
+                    style={{ width: 240, height: 100, marginTop: -700, alignItems: 'center', justifyContent: 'center' }} />
+            </View>
+
+            <View> 
+                <Text style={{marginTop: -575, fontWeight: 'bold', marginRight: 310}}>CPF:</Text>
+            </View>
+            
             <Input placeholder='Digite seu CPF'
                 style={{ fontSize: 14 }}
                 autoFocus={false} keyboardType='email-address'
                 onChangeText={value => setEmail(value)}
                 leftIcon={{ type: 'font-awesome', name: 'envelope' }}
                 leftIconContainerStyle={{ backgroundColor: '#FFF', borderColor: '#FFF', borderLeftWidth: 15, borderRightWidth: 1, borderRadius: 20, height: 25 }}
-                inputContainerStyle={{ borderRadius: 20, backgroundColor: '#fff', height: 40 }}
+                inputContainerStyle={{ borderRadius: 20, backgroundColor: '#fff', height: 40, marginTop: -550 }}
             />
-            <Text style={styles.text}>Senha:</Text>
+            <View>
+                
+                <Text style={{marginTop: -502, fontWeight: 'bold', marginRight: 300}}>Senha:</Text>
+
+            </View>
+            
             <Input placeholder='Digite sua senha'
                 style={{ fontSize: 14 }}
                 secureTextEntry={true}
                 onChangeText={value => setPassword(value)}
                 leftIcon={{ type: 'fontisto', name: 'key' }}
                 leftIconContainerStyle={{ backgroundColor: '#FFF', borderColor: '#FFF', borderLeftWidth: 13, borderRightWidth: 4, borderRadius: 20, height: 25 }}
-                inputContainerStyle={{ borderRadius: 20, backgroundColor: '#fff', height: 40 }}
+                inputContainerStyle={{ borderRadius: 20, backgroundColor: '#fff', height: 40, marginTop: -480 }}
             />
             <TouchableOpacity onPress={() => entrar()} style={styles.buttom}>
                 <Text style={{ color: '#FFF', textAlign: 'center', fontWeight: 'bold' }}>Login</Text>
             </TouchableOpacity>
-
-
         </SafeAreaView>
 
     )
@@ -57,7 +70,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#0D729C'
+
     },
     buttom: {
         width: '95%',
@@ -68,7 +81,7 @@ const styles = StyleSheet.create({
         borderColor: '#6495ED',
         borderWidth: 2,
         justifyContent: 'center',
-        margin: 10
+        marginTop: -400
     },
     input: {
         width: '100%',
