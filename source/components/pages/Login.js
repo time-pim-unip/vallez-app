@@ -59,6 +59,7 @@ export default function Login({ navigation }) {
             />
             <TouchableOpacity onPress={() => entrar()} style={styles.buttom}>
                 <Text style={{ color: '#FFF', textAlign: 'center', fontWeight: 'bold' }}>Login</Text>
+                
             </TouchableOpacity>
         </SafeAreaView>
 

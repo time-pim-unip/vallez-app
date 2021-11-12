@@ -10,7 +10,7 @@ export default function solicitacoes(navigation) {
     const [selectedValue, setSelectedValue] = useState("Serviço");
 
     const alert = () => {
-        Alert.alert('Solicitação Confirmada Com Sucesso!')
+        Alert.alert('Solicitação Confirmada Com Sucesso!', 'ok')
         
     }
     
