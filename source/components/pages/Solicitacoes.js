@@ -1,28 +1,40 @@
 import React, { useState } from 'react'
 import { View, Text, Image, StyleSheet, TouchableOpacity, Picker, Alert } from 'react-native'
 import { Input } from 'react-native-elements'
+import Quartos from './Quartos';
 
 
 
 
-export default function solicitacoes(navigation) {
+export default function solicitacoes({ navigation }) {
 
     const [selectedValue, setSelectedValue] = useState("Serviço");
 
     const alert = () => {
-        Alert.alert('Solicitação Confirmada Com Sucesso!', 'ok')
+        Alert.alert('Solicitação Confirmada Com Sucesso!', 'ok', [
+            {
+                text: 'Ok'
+            },
+        ])
         
+    }
+
+    const sair = () => {
+        navigation.navigate('Login')
+
+
     }
     
     return (
         <View style={styles.container}>
             <View>
 
-                <View style={{ borderWidth: 1, width: 300, height: 50, backgroundColor: '#fff' }}>
+
+                <View style={{ borderWidth: 2, width: 300, height: 50, backgroundColor: '#fff', left: 10, borderRadius: 15, marginTop: 170 }}>
                     <Picker
                         itemStyle={{ fontWeight: 'bold' }}
                         selectedValue={selectedValue}
-                        style={{ height: 100, width: 300, marginTop: -25, }}
+                        style={{ height: 100, width: 305, marginTop: -25, }}
                         onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
                     >
 
@@ -35,22 +47,35 @@ export default function solicitacoes(navigation) {
 
                 </View>
 
+                <Input placeholder='Digite a Quantidade'
+                    style={{ fontSize: 20, padding: 10 }}
+                    inputContainerStyle={{ borderRadius: 2, backgroundColor: '#fff', height: 50, marginTop: 40, borderWidth: 2, width: 305, borderRadius: 15 }}
+                    keyboardType='numeric'
+                />
+
+                <Text style={{ fontSize: 20, left: 120}}> Valor : </Text>
+
+                <Text style={{ fontSize: 20, }}> R$: 500,00</Text>
+
+
+            </View>
+
+            <View>
+                <Image source={require('../imgs/Logo.png')}
+                    style={{width:245, height:100, marginTop: -400 }}
+                />
             </View>
 
 
-
-            <Input placeholder='Digite a Quantidade'
-                style={{ fontSize: 20 }}
-                leftIconContainerStyle={{ backgroundColor: '#FFF', borderColor: '#FFF', borderLeftWidth: 1, borderRightWidth: 4, borderRadius: 20, height: 25 }}
-                inputContainerStyle={{ borderRadius: 1, backgroundColor: '#fff', height: 50, marginTop: 90, borderWidth: 2}}
-            
-            />
 
 
             <TouchableOpacity onPress={() => alert()} style={styles.buttom}>
                 <Text style={{ color: '#FFF', textAlign: 'center', fontWeight: 'bold' }}>Confirmar Solicitação</Text>
             </TouchableOpacity>
 
+            <TouchableOpacity onPress={() => sair()} style={styles.buttom2}>
+                <Text style={{ color: '#FFF', textAlign: 'center', fontWeight: 'bold' }}>Sair</Text>
+            </TouchableOpacity>
 
          </View>
 
@@ -64,7 +89,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#fff',
+        backgroundColor: '#FFF',
     },
     text: {
         fontSize: 50,
@@ -89,9 +114,18 @@ const styles = StyleSheet.create({
         borderColor: '#6495ED',
         borderWidth: 2,
         justifyContent: 'center',
-        marginTop: 300
-
+        marginTop: 50
     },
-
+    buttom2: {
+        width: '95%',
+        height: 40,
+        backgroundColor: '#fff',
+        borderRadius: 20,
+        backgroundColor: 'red',
+        borderColor: '#fff',
+        borderWidth: 2,
+        justifyContent: 'center',
+        marginTop: 50
+    }
 
 });
