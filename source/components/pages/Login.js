@@ -5,17 +5,44 @@ import {
     StyleSheet,
     TouchableOpacity,
     TextInput,
-    Image
+    Image,
+    Alert
 } from 'react-native'
 import { Input, Text } from 'react-native-elements'
 
+import api from './../../helpers/api';
+
+
 export default function Login({ navigation }) {
 
-    const [email, setEmail] = useState(null)
-    const [password, setPassword] = useState(null)
+    const [cpf, setCpf] = useState("")
+    const [password, setPassword] = useState("")
 
-    const entrar = () => {
-        navigation.navigate('Quartos')
+    async function entrar(){
+        //navigation.navigate('Quartos')
+
+        try {
+            const response = await api.post('/Autentica', {
+                Username: cpf,
+                Password: password
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            const { data } = response;
+
+            navigation.navigate('Quartos', {
+                user: data
+            })
+            
+
+        } catch(ex){
+            Alert.alert("Opa !", "Verifique o usuário e senha");
+            console.log("Nhe :/");
+            return;
+        }
 
 
     }
@@ -37,8 +64,9 @@ export default function Login({ navigation }) {
             
             <Input placeholder='Digite seu CPF'
                 style={{ fontSize: 14 }}
+                value={cpf}
                 autoFocus={false} keyboardType='email-address'
-                onChangeText={value => setEmail(value)}
+                onChangeText={value => setCpf(value)}
                 leftIcon={{ type: 'font-awesome', name: 'envelope' }}
                 leftIconContainerStyle={{ backgroundColor: '#FFF', borderColor: '#FFF', borderLeftWidth: 15, borderRightWidth: 1, borderRadius: 20, height: 25 }}
                 inputContainerStyle={{ borderRadius: 20, backgroundColor: '#fff', height: 40, marginTop: -550 }}
@@ -51,6 +79,7 @@ export default function Login({ navigation }) {
             
             <Input placeholder='Digite sua senha'
                 style={{ fontSize: 14 }}
+                value={password}
                 secureTextEntry={true}
                 onChangeText={value => setPassword(value)}
                 leftIcon={{ type: 'fontisto', name: 'key' }}

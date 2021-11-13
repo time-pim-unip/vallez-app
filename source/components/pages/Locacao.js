@@ -1,26 +1,40 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 
-export default function suitePremium({ navigation }) {
+import api from '../../helpers/api';
 
-    const solicitacoes = () => {
-        navigation.navigate('Solicitações')
+
+export default function Locacao({ route }) {
+    useEffect(()=>{
+        
+        handleBuscarQuartoLocado();
+
+    }, []);
+
+    async function handleBuscarQuartoLocado(){
+        const { idLocacao } = route.params;
+        
+        const response = await api.get("/Locacao/"+idLocacao);
+        const { data } = response;
+
+        console.log(data);
+
     }
+
 
     return (
         <View >
             <View style={styles.container}>
-                <Image source={require('../../imgs/suitepremium.png')}
-                    style={{ width: 500, height: 290, marginTop: 300 }} />
+                <Image source={require('../imgs/hotel-cama.png')}
+                style={{ width: 500, height: 290, marginTop: 300 }} />
             </View>
-            <Text style={styles.text}>
+            <Text style={styles.text}> 
                 Informações
             </Text>
             <Text style={styles.informacao}>
                 Pegar no Desktop
             </Text>
-            <TouchableOpacity onPress={() => solicitacoes()}
-                style={styles.buttom}>
+            <TouchableOpacity style={styles.buttom}>
                 <Text style={{ color: '#fff', textAlign: 'center', fontWeight: 'bold' }}>Solicitar Serviços</Text>
             </TouchableOpacity>
         </View>
@@ -41,7 +55,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'black',
     },
-    informacao: {
+    informacao:{
         right: -10,
         marginTop: 10,
         color: 'black',
