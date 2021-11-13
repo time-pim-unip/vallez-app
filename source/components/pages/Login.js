@@ -6,7 +6,8 @@ import {
     TouchableOpacity,
     TextInput,
     Image,
-    Alert
+    Alert,
+    Animated
 } from 'react-native'
 import { Input, Text } from 'react-native-elements'
 
@@ -46,6 +47,7 @@ export default function Login({ navigation }) {
 
 
     }
+    
 
     return (
         <SafeAreaView style={styles.container}>
@@ -91,7 +93,6 @@ export default function Login({ navigation }) {
                 
             </TouchableOpacity>
         </SafeAreaView>
-
     )
 }
 
