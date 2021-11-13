@@ -1,83 +1,127 @@
-import React, { useState } from 'react'
-import { View, Text, Image, StyleSheet, TouchableOpacity, Picker, Alert } from 'react-native'
+import React, { useState, useEffect, useLayoutEffect } from 'react'
+import { View, Text, Button, ScrollView, KeyboardAvoidingView, StyleSheet, Animated, TouchableOpacity, Picker, Alert, SafeAreaView, Platform } from 'react-native'
 import { Input } from 'react-native-elements'
 import Quartos from './Quartos';
 
+import api from '../../helpers/api';
+
+export default function solicitacoes({ navigation, route }) {
+    const [selectedValue, setSelectedValue] = useState("");
+    const [servicos, setServicos] = useState([]);
+    const [servicoSolicitado, setServicosSolicitados] = useState({});
+    const [valor, setValor] = useState(0);
+    const [quantidade, setQuantidade] = useState(0);
 
 
+    useEffect(()=>{
+        handleListarServicos();
+    }, []);
 
-export default function solicitacoes({ navigation }) {
 
-    const [selectedValue, setSelectedValue] = useState("Serviço");
+    async function handleListarServicos(){
+        const response = await api.get('/Servicos');
 
-    const alert = () => {
-        Alert.alert('Solicitação Confirmada Com Sucesso!', 'ok', [
-            {
-                text: 'Ok'
-            },
-        ])
-        
+        const { data } = response;
+        setServicos(data);
+
     }
 
     const sair = () => {
         navigation.navigate('Login')
+    }
+
+    function handleSelecionarServico(e){
+
+        const servico = servicos.map(s => s).find(s => s.id == e);
+        if (servico != null) {
+            setValor(servico.valor * quantidade);
+            setServicosSolicitados(servico);
+            setSelectedValue(e)
+        };
+    }
+
+    function handleQuantidadeServico(e){
+        setQuantidade(e);
+        setValor(servicoSolicitado.valor * e);
+    }
+
+    async function handleSolicitarServico(){
+
+        if (!servicoSolicitado) {
+            Alert.alert("Atenção !", "Você precisa selecionar um serviço antes de continuar !");
+            return;
+        }
+
+        if (quantidade == 0) {
+            Alert.alert("Atenção !", "A quantidade não pode ser igual a zero !");
+            return;
+        }
+
+        const response = await api.post('/Servicos', {
+            IdServico: servicoSolicitado.id,
+            IdLocacao: route.params.locacao.id ,
+            Quantidade: quantidade,
+        }, {
+            headers: {
+                'Content-Type': "application/json"
+            }
+        });
+
+        const { data } = response;
+
+        Alert.alert("Sucesso !", "O serviço foi solicitado e logo um funcionário irá entrar em contato com você =D");
+
+        setSelectedValue("");
+        setServicosSolicitados(null);
+        setQuantidade(0);
+        setValor(null);
+
 
 
     }
     
     return (
-        <View style={styles.container}>
-            <View>
+        <KeyboardAvoidingView 
+            behavior='position'
+            style={[styles.container]}
+        >
+            <Text style={{width: '100%', textAlign: 'center', fontSize: 20, fontWeight: 'bold', marginVertical: 30}}> Escolha o serviço desejado </Text>
+            <ScrollView style={{width: '100%', display: 'flex', direction: 'row', height: '100%'}} contentContainerStyle={{alignItems: 'center'}}>
+                <Picker
+                    itemStyle={{ fontWeight: 'bold' }}
+                    selectedValue={selectedValue}
+                    style={{ padding: 5, borderRadius: 5, width: "90%" }}
+                    onValueChange={(itemValue, itemIndex) => handleSelecionarServico(itemValue)}
+                >
 
+                    <Picker.Item label="Selecione..." value="" />
+                    {(servicos.map(servico => (
+                        <Picker.Item key={servico.id} label={servico.descricao} value={servico.id} />
+                    )))}
 
-                <View style={{ borderWidth: 2, width: 300, height: 50, backgroundColor: '#fff', left: 10, borderRadius: 15, marginTop: 170 }}>
-                    <Picker
-                        itemStyle={{ fontWeight: 'bold' }}
-                        selectedValue={selectedValue}
-                        style={{ height: 100, width: 305, marginTop: -25, }}
-                        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-                    >
-
-                        <Picker.Item label="Selecione" value="" />
-                        <Picker.Item label="Toalha de Rosto" value="Toalha de Rosto" />
-                        <Picker.Item label="Limpeza do Quarto" value="Limpeza do Quarto" />
-                        <Picker.Item label="Toalha de banho" value="Toalha de banho" />
-
-                    </Picker>
-
-                </View>
+                </Picker>
 
                 <Input placeholder='Digite a Quantidade'
-                    style={{ fontSize: 20, padding: 10 }}
-                    inputContainerStyle={{ borderRadius: 2, backgroundColor: '#fff', height: 50, marginTop: 40, borderWidth: 2, width: 305, borderRadius: 15 }}
+                    style={{ padding: 5,  display: 'flex'  }}
+                    inputContainerStyle={{ backgroundColor: '#fff', borderWidth: 1,  borderRadius: 5, margin: 10 }}
                     keyboardType='numeric'
+                    value={quantidade}
+                    onChangeText={e => handleQuantidadeServico(e)}
                 />
 
-                <Text style={{ fontSize: 20, left: 120}}> Valor : </Text>
-
-                <Text style={{ fontSize: 20, }}> R$: 500,00</Text>
-
-
-            </View>
-
-            <View>
-                <Image source={require('../imgs/Logo.png')}
-                    style={{width:245, height:100, marginTop: -400 }}
-                />
-            </View>
-
-
-
-
-            <TouchableOpacity onPress={() => alert()} style={styles.buttom}>
-                <Text style={{ color: '#FFF', textAlign: 'center', fontWeight: 'bold' }}>Confirmar Solicitação</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => sair()} style={styles.buttom2}>
+                { (valor) ? (<Text style={{ fontSize: 20, left: 120}}> Valor: R$ {valor} </Text>) : null }
+            
+                <TouchableOpacity onPress={handleSolicitarServico} style={styles.buttom}>
+                    <Text style={{color: '#FFF', textAlign: 'center', fontWeight: 'bold' }}>Confirmar Solicitação</Text>
+                </TouchableOpacity>
+            
+            </ScrollView>
+            
+            {/* <TouchableOpacity onPress={() => sair()} style={styles.buttom2}>
                 <Text style={{ color: '#FFF', textAlign: 'center', fontWeight: 'bold' }}>Sair</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
-         </View>
+         </KeyboardAvoidingView>
 
     )
 }
@@ -87,9 +131,6 @@ export default function solicitacoes({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#40E0D0',
     },
     text: {
         fontSize: 50,
@@ -106,7 +147,7 @@ const styles = StyleSheet.create({
         borderColor: '#333',
     },
     buttom: {
-        width: '95%',
+        width: '50%',
         height: 40,
         backgroundColor: '#fff',
         borderRadius: 20,
@@ -114,18 +155,7 @@ const styles = StyleSheet.create({
         borderColor: '#6495ED',
         borderWidth: 2,
         justifyContent: 'center',
-        marginTop: 50
-    },
-    buttom2: {
-        width: '95%',
-        height: 40,
-        backgroundColor: '#fff',
-        borderRadius: 20,
-        backgroundColor: 'red',
-        borderColor: '#fff',
-        borderWidth: 2,
-        justifyContent: 'center',
-        marginTop: 50
+        margin: 20
     }
 
 });

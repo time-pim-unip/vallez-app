@@ -41,7 +41,7 @@ export default function Login({ navigation }) {
 
         } catch(ex) {
             Alert.alert("Opa !", "Verifique o usuário e senha");
-            console.log("Nhe :/");
+            console.log(ex);
             return;
         }
 

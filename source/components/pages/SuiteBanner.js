@@ -17,10 +17,10 @@ const SuiteBanner = ({locacao, navigation}) => {
 
     useEffect(()=>{
 
-        console.log(navigation);
+        console.log(locacao);
 
         if (locacao.dataEntrada != null) setDataEntrada(new Date(locacao.dataEntrada))
-        if (locacao.dataSaida != null) setDataSaida(new Date(locacao.dataEntrada))
+        if (locacao.dataSaida != null) setDataSaida(new Date(locacao.dataSaida))
         if (locacao.checkIn != null) setCheckIn(new Date(locacao.checkIn))
         if (locacao.checkOut != null) setCheckOut(new Date(locacao.checkOut))
 
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     }, dateText:{
         fontWeight: 'bold',
         color: '#fff',
-        display: 'block'
+        display: 'flex'
     }
 });
 

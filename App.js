@@ -14,7 +14,6 @@ function drawer({ route }) {
   return (
     <Drawer.Navigator>
       <Drawer.Screen name='Quartos'  component={Quartos} initialParams={route.params} />
-      <Drawer.Screen name='Solicitações' component={Solicitacoes} />
       <Drawer.Screen name='Sair' component={Login} options={{headerShown: false}} />
     </Drawer.Navigator>
   )
@@ -29,6 +28,7 @@ export default function App() {
         <Stack.Screen name='Login' component={Login} options={{ headerShown: false}} />
         <Stack.Screen name='Quartos' component={drawer} options={{ headerShown: false }} />
         <Stack.Screen name='Locacao' component={Locacao}  />
+        <Stack.Screen name='Solicitações' component={Solicitacoes} />
       </Stack.Navigator>
     </NavigationContainer>
   )

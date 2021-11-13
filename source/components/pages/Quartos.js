@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, View, Text, StyleSheet, ImageBackgroundComponent, Button, Image, TouchableOpacity } from 'react-native';
+import { SafeAreaView, RefreshControl, View, Text, StyleSheet, ImageBackgroundComponent, Button, Image, TouchableOpacity } from 'react-native';
 import { ScrollView } from "react-native-gesture-handler";
 import SuiteBanner from './SuiteBanner';
 
@@ -7,6 +7,8 @@ import api from './../../helpers/api';
 
 export default function Quartos({ navigation, route }) {
   const [locacoes, setLocacoes] = useState({locacoesAtivas: [], locacoesHoje: [], locacoesFuturas: []});
+  const [reaload, setReload] = useState(false);
+
 
   useEffect(() => {
     getLocacoesHospede();
@@ -18,60 +20,81 @@ export default function Quartos({ navigation, route }) {
     const response = await api.get(`/Hospede/${user.id}/Locacoes`);
 
     const { data } = response;
+    console.log(data);
     setLocacoes(data);
 
   }
 
-  return (
-    <ScrollView>
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
-      {/* <Text style={{ marginLeft: -30, fontWeight: 'bold', fontSize: 20}}>Suas Locações Ativas: </Text> */}
+  const handleOnRefresh = React.useCallback(() => {
+    setReload(true);
+    setTimeout(()=>{
       
-        {(locacoes.locacoesAtivas.length > 0) ? (
-          <View>
-            <Text style={styles.title}>Suas locações ativas:</Text>
-            <View>
-              {locacoes.locacoesAtivas.map(locacao => (
-                <SuiteBanner
-                  key={locacao.id}
-                  locacao={locacao}
-                  navigation={navigation}
-                />
-              ))}              
-            </View>
-          </View>
-        ) : null}
+      getLocacoesHospede();
+      setReload(false);
+    },1000);
+  }, []);
 
-        {(locacoes.locacoesHoje.length > 0) ? (
-          <View>
-            <Text style={styles.title}>Suas locações para hoje:</Text>
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <ScrollView 
+        refreshControl={
+          <RefreshControl
+            refreshing={reaload}
+            onRefresh={handleOnRefresh}
+          />
+        }
+      >
+        <View style={styles.container}>
+        <Text style={{ fontWeight: 'bold', fontSize: 20, width: '100%', textAlign: 'center', marginTop: 10}}>Suas Locações </Text>
+        
+          {(locacoes.locacoesAtivas.length > 0) ? (
             <View>
-              {locacoes.locacoesAtivas.map(locacao => (
-                <SuiteBanner
-                  locacao={locacao}
-                />
-              ))}              
+              <Text style={styles.title}>Locações Ativas:</Text>
+              <View>
+                {locacoes.locacoesAtivas.map(l1 => (
+                  <SuiteBanner
+                    key={l1.id}
+                    locacao={l1}
+                    navigation={navigation}
+                  />
+                ))}              
+              </View>
             </View>
-          </View>
-        ) : null}
+          ) : null}
 
-        {(locacoes.locacoesFuturas.length > 0) ? (
-          <View>
-            <Text style={styles.title}>Suas locações futuras:</Text>
+          {(locacoes.locacoesHoje.length > 0) ? (
             <View>
-              {locacoes.locacoesAtivas.map(locacao => (
-                <SuiteBanner
-                  locacao={locacao}
-                />
-              ))}              
+              <Text style={styles.title}>Locações Para Hoje:</Text>
+              <View>
+                {locacoes.locacoesHoje.map(l2 => (
+                  <SuiteBanner
+                    key={l2.id}
+                    locacao={l2}
+                    navigation={navigation}
+                  />
+                ))}              
+              </View>
             </View>
-          </View>
-        ) : null}
+          ) : null}
 
-      </View>
+          {(locacoes.locacoesFuturas.length > 0) ? (
+            <View>
+              <Text style={styles.title}>Locações Futuras:</Text>
+              <View>
+                {locacoes.locacoesFuturas.map(l3 => (
+                  <SuiteBanner
+                    key={l3.id}
+                    locacao={l3}
+                    navigation={navigation}
+                  />
+                ))}              
+              </View>
+            </View>
+          ) : null}
+
+        </View>
+      </ScrollView>
     </SafeAreaView>
-    </ScrollView>
   );
 };
 
@@ -109,7 +132,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: 'bold',
-    fontSize: '18px',
+    fontSize: 18,
     margin: 10
   }
 
