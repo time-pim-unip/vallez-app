@@ -38,7 +38,7 @@ export default function Login({ navigation }) {
             })
             
 
-        } catch(ex){
+        } catch(ex) {
             Alert.alert("Opa !", "Verifique o usuário e senha");
             console.log("Nhe :/");
             return;

@@ -29,7 +29,7 @@ const SuiteBanner = ({locacao, navigation}) => {
     function handleAbrirLocacao(){
 
         navigation.navigate('Locacao', {
-            idLocacao: locacao.id
+            locacao
         });
 
     }

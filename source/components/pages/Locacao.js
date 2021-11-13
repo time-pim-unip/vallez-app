@@ -5,6 +5,13 @@ import api from '../../helpers/api';
 
 
 export default function Locacao({ route }) {
+    const [bloco, setBloco] = useState();
+    const [numero, setNumero] = useState();
+    const [dataEntrada, setDataEntrada] = useState(null);
+    const [dataSaida, setDataSaida] = useState(null);
+    const [checkIn, setCheckIn] = useState(null);
+    const [checkOut, setCheckOut] = useState(null);
+
     useEffect(()=>{
         
         handleBuscarQuartoLocado();
@@ -12,31 +19,57 @@ export default function Locacao({ route }) {
     }, []);
 
     async function handleBuscarQuartoLocado(){
-        const { idLocacao } = route.params;
+        const { locacao } = route.params;
         
-        const response = await api.get("/Locacao/"+idLocacao);
+        const response = await api.get("/Locacao/"+locacao.id);
         const { data } = response;
 
-        console.log(data);
+        setBloco(data.bloco);
+        setNumero(data.numero);
+
+        if (locacao.dataEntrada != null) setDataEntrada(new Date(locacao.dataEntrada));
+        if (locacao.dataSaida != null) setDataSaida(new Date(locacao.dataEntrada));
+        if (locacao.checkIn != null) setCheckIn(new Date(locacao.checkIn));
+        if (locacao.checkOut != null) setCheckOut(new Date(locacao.checkOut));
 
     }
 
-
     return (
-        <View >
+        <View style={{ display: 'flex', justifyContent: 'space-between', height: '100%'}} >
             <View style={styles.container}>
                 <Image source={require('../imgs/hotel-cama.png')}
-                style={{ width: 500, height: 290, marginTop: 300 }} />
+                style={{ width: 500, height: 290, marginBottom: 10 }} />
+
+                <Text>
+                    <Text style={styles.text} > Bloco: </Text> { bloco }
+                </Text>
+
+                <Text>
+                    <Text style={styles.text} > Numero: </Text> { numero }
+                </Text>
+
+                <Text>
+                    <Text style={styles.text} > Data Entrada: </Text> { (dataEntrada) ? dataEntrada.toLocaleDateString() : '' }
+                </Text>
+
+                <Text>
+                    <Text style={styles.text} > Data Saida: </Text> { (dataSaida) ? dataEntrada.toLocaleDateString() : '' }
+                </Text>
+
+                <Text>
+                    <Text style={styles.text} > Check-in: </Text> { (checkIn) ? checkIn.toLocaleDateString() : '' }
+                </Text>
+
+                <Text>
+                    <Text style={styles.text} > Check-out: </Text> { (checkOut) ? checkOut.toLocaleDateString() : '' }
+                </Text>
+
             </View>
-            <Text style={styles.text}> 
-                Informações
-            </Text>
-            <Text style={styles.informacao}>
-                Pegar no Desktop
-            </Text>
-            <TouchableOpacity style={styles.buttom}>
-                <Text style={{ color: '#fff', textAlign: 'center', fontWeight: 'bold' }}>Solicitar Serviços</Text>
-            </TouchableOpacity>
+            <View style={{ height: 100, display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
+                <TouchableOpacity style={styles.buttom}>
+                    <Text style={{ color: '#fff', textAlign: 'center', fontWeight: 'bold' }}>Solicitar Serviços</Text>
+                </TouchableOpacity>
+            </View>
         </View>
 
     )
@@ -45,24 +78,18 @@ export default function Locacao({ route }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        flexGrow: 1,
         backgroundColor: '#fff'
     },
     text: {
-        right: -165,
-        marginTop: 300,
         fontWeight: 'bold',
         color: 'black',
     },
     informacao:{
-        right: -10,
         marginTop: 10,
         color: 'black',
-
     },
     buttom: {
-        right: -20,
         width: '90%',
         height: 40,
         backgroundColor: '#fff',
@@ -71,6 +98,5 @@ const styles = StyleSheet.create({
         borderColor: '#6495ED',
         borderWidth: 2,
         justifyContent: 'center',
-        marginTop: 220
     },
 })
