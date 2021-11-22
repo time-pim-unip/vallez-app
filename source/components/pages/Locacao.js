@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Dimensions, View, Text, Image, StyleSheet, TouchableOpacity, RefreshControl, SafeAreaView, ScrollView } from 'react-native'
+import { Dimensions, View, Text, Image, StyleSheet, TouchableOpacity, RefreshControl, SafeAreaView, ScrollView, Alert } from 'react-native'
 
 import api from '../../helpers/api';
 
@@ -40,6 +40,11 @@ export default function Locacao({ route, navigation }) {
         const { locacao } = route.params;
         
         const response = await api.get("/Locacao/"+locacao.id);
+
+        if (response.status != 200) {
+            navigation.navigate("Quartos");
+        }
+
         const { quarto, servicosSolicitados } = response.data;
         
         setQuarto(quarto);
@@ -64,6 +69,24 @@ export default function Locacao({ route, navigation }) {
         navigation.navigate('Solicitações', {
             locacao
         });
+    }
+
+    async function handleCancelarHospedagem(){
+
+
+        const { locacao } = route.params;
+        const response = await api.delete('/Locacao/'+locacao.id);
+
+        console.log(response);
+
+        if (response.status != 200) {
+            Alert.alert("Ops", "Não foi possivel cancelar sua solicitação, entre em contato com o hotel. ");
+            return;
+        }
+
+        Alert.alert("Sucesso !", "Sua solicitação foi cancelada !");
+        navigation.navigate("Quartos");
+
     }
 
 
@@ -127,7 +150,7 @@ export default function Locacao({ route, navigation }) {
                             <Text  style={{ color: '#fff', textAlign: 'center', fontWeight: 'bold' }}>Solicitar Serviços</Text>
                         </TouchableOpacity>
                     ) : (
-                        <TouchableOpacity style={styles.buttomCancel} onPress={handleRedirecionar}>
+                        <TouchableOpacity style={styles.buttomCancel} onPress={handleCancelarHospedagem}>
                             <Text  style={{ color: '#fff', textAlign: 'center', fontWeight: 'bold' }}>Cancelar Hospedagem</Text>
                         </TouchableOpacity>
                     )}
