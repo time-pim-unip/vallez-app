@@ -4,23 +4,24 @@ import { ScrollView } from "react-native-gesture-handler";
 import SuiteBanner from './SuiteBanner';
 
 import api from './../../helpers/api';
+import { useUser } from './../../Context/UserContext';
 
 export default function Quartos({ navigation, route }) {
   const [locacoes, setLocacoes] = useState({locacoesAtivas: [], locacoesHoje: [], locacoesFuturas: []});
   const [reaload, setReload] = useState(false);
-
+  const { user } = useUser();
 
   useEffect(() => {
+    
     getLocacoesHospede();
   }, []);
 
   async function getLocacoesHospede(){
-    
-    const { user } = route.params;
+
+    //const { user } = route.params;
     const response = await api.get(`/Hospede/${user.id}/Locacoes`);
 
     const { data } = response;
-    console.log(data);
     setLocacoes(data);
 
   }

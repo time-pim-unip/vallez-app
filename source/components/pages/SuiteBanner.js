@@ -17,8 +17,6 @@ const SuiteBanner = ({locacao, navigation}) => {
 
     useEffect(()=>{
 
-        console.log(locacao);
-
         if (locacao.dataEntrada != null) setDataEntrada(new Date(locacao.dataEntrada))
         if (locacao.dataSaida != null) setDataSaida(new Date(locacao.dataSaida))
         if (locacao.checkIn != null) setCheckIn(new Date(locacao.checkIn))
@@ -47,6 +45,7 @@ const SuiteBanner = ({locacao, navigation}) => {
           {/* <Text style={styles.buttonTextStyle}>
             Suite Premium
           </Text> */}
+          <Text style={styles.dateText} >Numero Locacao: {locacao.id} </Text>
           <Text style={styles.dateText} >Entrada prevista: { (dataEntrada) ? dataEntrada.toLocaleDateString() : '' }</Text>
           <Text style={styles.dateText} >Saida prevista: { (dataSaida) ? dataSaida.toLocaleDateString() : '' }</Text>
           <Text style={styles.dateText} >Check-in: { (checkIn) ? checkIn.toLocaleDateString() : '' }</Text>

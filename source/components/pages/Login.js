@@ -12,10 +12,10 @@ import {
 import { Input, Text } from 'react-native-elements'
 
 import api from './../../helpers/api';
-
+import { useUser } from './../../Context/UserContext';
 
 export default function Login({ navigation }) {
-
+    const { user, setUser } = useUser();
     const [cpf, setCpf] = useState("")
     const [password, setPassword] = useState("")
 
@@ -33,15 +33,12 @@ export default function Login({ navigation }) {
             });
 
             const { data } = response;
-
-            navigation.navigate('Quartos', {
-                user: data
-            })
+            setUser(data)
+            navigation.navigate('Quartos')
             
 
         } catch(ex) {
             Alert.alert("Opa !", "Verifique o usuário e senha");
-            console.log(ex);
             return;
         }
 
