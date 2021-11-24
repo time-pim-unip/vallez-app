@@ -2,6 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { StatusBar } from 'expo-status-bar';
 
 import Login from './source/components/pages/Login';
 import Quartos from './source/components/pages/Quartos';
@@ -35,6 +36,7 @@ export default function App() {
           <Stack.Screen name='Solicitações' component={Solicitacoes} />
         </Stack.Navigator>
       </NavigationContainer>
+      <StatusBar style="auto" />
     </UserProvider>
 
   )
